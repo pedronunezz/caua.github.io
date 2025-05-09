@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinéfilos de Plantão</title>
+    <style>
+        /* Estilos gerais */
+        body {
+            font-family: Baskerville, serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #030303;
+            color: rgb(212, 15, 15); /* Cor do título alterada para vermelho */
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3em;
+        }
+
+        /* Estilo do conteúdo */
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 40px 0;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            text-align: center;
+            color: #353232;
+        }
+
+        section p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #d42525;
+            text-align: justify;
+        }
+
+        /* Estilo do formulário */
+        .form-container {
+            margin: 20px 0;
+            background-color: #070505; /* Container preto */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.863);
+            color: white; /* Texto branco dentro do container preto */
+        }
+
+        .form-container input, .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #ececec;
+        }
+
+        /* Estilo da lista de filmes comentados */
+        .comment-section {
+            background-color: #d8d6d6; /* Container preto */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            color: white; /* Texto branco dentro do container preto */
+        }
+
+        .comment {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #050505; /* Comentário de fundo cinza escuro */
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment h3 {
+            margin-top: 0;
+            font-size: 1.6em;
+            color: rgb(255, 255, 255); /* Título do comentário em vermelho */
+        }
+
+        .comment p {
+            color: white; /* Texto do comentário em branco */
+            font-size: 1.2em;
+        }
+
+        .delete-btn {
+            background-color: #d42525;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .delete-btn:hover {
+            background-color: #a11616;
+        }
+
+        /* Estilo de navegação */
+        nav {
+            background-color: #020202;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+            font-size: 1.2em;
+            padding: 10px;
+        }
+
+        nav ul li a:hover {
+            background-color: #080808;
+            border-radius: 5px;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #030303;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Estilo dos Termos de Privacidade */
+        .privacy-policy {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+            text-align: center;
+        }
+
+        .privacy-policy input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Cinéfilos de Plantão</h1>
+    <p>Comente sobre filmes, escreva resumos e compartilhe sua paixão pelo cinema!</p>
+</header>
+
+<!-- Seção de Introdução -->
+<section id="introducao">
+    <h2>Bem-vindo ao Cinéfilos de Plantão!</h2>
+    <p>Este é o espaço perfeito para quem ama cinema e quer compartilhar suas experiências e pensamentos sobre os filmes que assistiu. Você pode comentar sobre suas produções favoritas, escrever resumos ou até mesmo debater sobre os detalhes que mais te marcaram.</p>
+    <p>Junte-se a nós e vamos criar uma comunidade de cinéfilos apaixonados, onde todos podem expressar sua opinião e trocar ideias sobre o incrível mundo do cinema!</p>
+</section>
+
+<nav>
+    <ul>
+        <li><a href="#comentarios">Comentários</a></li>
+        <li><a href="#resumo">Escreva seu Resumo</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <!-- Seção de Comentários -->
+    <section id="comentarios">
+        <h2>Deixe seu Comentário sobre um Filme</h2>
+        <div class="form-container">
+            <h3>Comente sobre o filme que você assistiu</h3>
+            <form id="comment-form" onsubmit="return submitComment()">
+                <input type="text" id="movie-name" placeholder="Nome do Filme" required>
+                <textarea id="comment-text" placeholder="Escreva seu comentário..." required></textarea>
+                <input type="submit" value="Enviar Comentário">
+            </form>
+        </div>
+
+        <!-- Lista de Comentários -->
+        <div id="comment-list" class="comment-section">
+            <!-- Comentários aparecerão aqui -->
+        </div>
+    </section>
+
+    <!-- Seção de Resumo de Filmes -->
+    <section id="resumo">
+        <h2>Escreva seu Resumo sobre um Filme</h2>
+        <div class="form-container">
+            <h3>Compartilhe um resumo de um filme que você ama</h3>
+            <form id="summary-form" onsubmit="return submitSummary()">
+                <input type="text" id="movie-summary-name" placeholder="Nome do Filme" required>
+                <textarea id="summary-text" placeholder="Escreva o resumo do filme..." required></textarea>
+                <input type="submit" value="Enviar Resumo">
+            </form>
+        </div>
+
+        <!-- Lista de Resumos -->
+        <div id="summary-list" class="comment-section">
+            <!-- Resumos aparecerão aqui -->
+        </div>
+    </section>
+
+    <!-- Termos de Privacidade -->
+    <section class="privacy-policy">
+        <p>
+            Ao enviar seu comentário ou resumo, você concorda com nossa <a href="politica-de-privacidade.html">Política de Privacidade</a>.
+        </p>
+        <label>
+            <input type="checkbox" id="privacy-accept" required>
+            Eu aceito os termos de privacidade.
+        </label>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2025 Cinéfilos de Plantão - Todos os direitos reservados.</p>
+</footer>
+
+<script>
+    // Função para enviar o comentário
+    function submitComment() {
+        var privacyAccepted = document.getElementById('privacy-accept').checked;
+        if (!privacyAccepted) {
+            alert("Você precisa aceitar os termos de privacidade para continuar.");
+            return false;
+        }
+
+        var movieName = document.getElementById('movie-name').value;
+        var commentText = document.getElementById('comment-text').value;
+
+        var commentList = document.getElementById('comment-list');
+
+        var commentDiv = document.createElement('div');
+        commentDiv.classList.add('comment');
+        commentDiv.innerHTML = "<h3>" + movieName + "</h3><p>" + commentText + "</p>";
+
+        // Botão de exclusão
+        var deleteBtn = document.createElement('button');
+        deleteBtn.innerHTML = "Excluir";
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.onclick = function() {
+            commentList.removeChild(commentDiv); // Remove o comentário
+            deleteCommentFromStorage(movieName, commentText); // Remove o comentário do localStorage
+        };
+        commentDiv.appendChild(deleteBtn);
+
+        commentList.appendChild(commentDiv);
+
+        // Armazenar o comentário no localStorage
+        var comments = JSON.parse(localStorage.getItem('comments')) || [];
+        comments.push({ movieName: movieName, commentText: commentText });
+        localStorage.setItem('comments', JSON.stringify(comments));
+
+        // Limpar o formulário após o envio
+        document.getElementById('comment-form').reset();
+
+        return false;
+    }
+
+    // Função para enviar o resumo do filme
+    function submitSummary() {
+        var privacyAccepted = document.getElementById('privacy-accept').checked;
+        if (!privacyAccepted) {
+            alert("Você precisa aceitar os termos de privacidade para continuar.");
+            return false;
+        }
+
+        var movieName = document.getElementById('movie-summary-name').value;
+        var summaryText = document.getElementById('summary-text').value;
+
+        var summaryList = document.getElementById('summary-list');
+
+        var summaryDiv = document.createElement('div');
+        summaryDiv.classList.add('comment');
+        summaryDiv.innerHTML = "<h3>" + movieName + "</h3><p>" + summaryText + "</p>";
+
+        // Botão de exclusão
+        var deleteBtn = document.createElement('button');
+        deleteBtn.innerHTML = "Excluir";
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.onclick = function() {
+            summaryList.removeChild(summaryDiv); // Remove o resumo
+            deleteSummaryFromStorage(movieName, summaryText); // Remove o resumo do localStorage
+        };
+        summaryDiv.appendChild(deleteBtn);
+
+        summaryList.appendChild(summaryDiv);
+
+        // Armazenar o resumo no localStorage
+        var summaries = JSON.parse(localStorage.getItem('summaries')) || [];
+        summaries.push({ movieName: movieName, summaryText: summaryText });
+        localStorage.setItem('summaries', JSON.stringify(summaries));
+
+        // Limpar o formulário após o envio
+        document.getElementById('summary-form').reset();
+
+        return false;
+    }
+
+    // Função para carregar comentários e resumos armazenados no localStorage
+    function loadData() {
+        var comments = JSON.parse(localStorage.getItem('comments')) || [];
+        var summaries = JSON.parse(localStorage.getItem('summaries')) || [];
+
+        // Carregar comentários
+        var commentList = document.getElementById('comment-list');
+        comments.forEach(function(comment) {
+            var commentDiv = document.createElement('div');
+            commentDiv.classList.add('comment');
+            commentDiv.innerHTML = "<h3>" + comment.movieName + "</h3><p>" + comment.commentText + "</p>";
+
+            // Botão de exclusão
+            var deleteBtn = document.createElement('button');
+            deleteBtn.innerHTML = "Excluir";
+            deleteBtn.classList.add('delete-btn');
+            deleteBtn.onclick = function() {
+                commentList.removeChild(commentDiv); // Remove o comentário
+                deleteCommentFromStorage(comment.movieName, comment.commentText); // Remove o comentário do localStorage
+            };
+            commentDiv.appendChild(deleteBtn);
+
+            commentList.appendChild(commentDiv);
+        });
+
+        // Carregar resumos
+        var summaryList = document.getElementById('summary-list');
+        summaries.forEach(function(summary) {
+            var summaryDiv = document.createElement('div');
+            summaryDiv.classList.add('comment');
+            summaryDiv.innerHTML = "<h3>" + summary.movieName + "</h3><p>" + summary.summaryText + "</p>";
+
+            // Botão de exclusão
+            var deleteBtn = document.createElement('button');
+            deleteBtn.innerHTML = "Excluir";
+            deleteBtn.classList.add('delete-btn');
+            deleteBtn.onclick = function() {
+                summaryList.removeChild(summaryDiv); // Remove o resumo
+                deleteSummaryFromStorage(summary.movieName, summary.summaryText); // Remove o resumo do localStorage
+            };
+            summaryDiv.appendChild(deleteBtn);
+
+            summaryList.appendChild(summaryDiv);
+        });
+    }
+
+    // Carregar os dados ao carregar a página
+    window.onload = loadData;
+</script>
+
+</body>
+</html>
+
